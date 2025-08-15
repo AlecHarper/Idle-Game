@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do not...</title>
+    <link rel="icon" type="image/png" href="assets/well_icon_updated.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="scoreboard">
+        <span>Wordly Attachment</span>
+        <div id="attachmentTracker"></div>
+    </div>
+    
+    <div class="mainContain">
+        <div class="mainBox">
+            <div class="row">
+                <p>Base Click Power:</p>
+                <p id="baseClick"></p>
+            </div>
+            <div class="row">
+                <p>Click Multiplier:</p>
+                <p id="clickMult"></p>
+            </div>
+            <div class="row">
+                <p>Loss Per Click:</p>
+                <p id="gainPer"></p>
+            </div>
+            <div class="row">
+                <p>Possessions Burned Each Day:</p>
+                <p id="burnPer"></p>
+            </div>
+        </div>
+
+        <div class="main">
+            <button class="actionButton" id="doNothing">Do not.</button>
+        </div>
+
+        <div class="mainBox">
+            <div class="row">
+                <p>Anti-Meditations</p>
+            </div>
+            <!-- Less Is More-->
+            <div class="row">
+                <button class="price" style = "display:none" id="lessPrice"></button>
+                <button class="actionButton" style = "display:none" id="lessIs">--- More is less ---<p id="lessOwned"></p></button>
+                <button class="tooltips" id="lessTip" style="display:none">Drop Down Arrow</button>
+            </div>
+            <div id = "lessToolTip" class="row" style="display: none">
+                <p>
+                    Expend a small amount of energy now ... to increase your ability to not use energy later! (Increase Do Not click multiplier by 5%)
+                </p>
+            </div>
+            <!-- Small Incinerators -->
+            <div class="row">
+                <button class="price" style = "display:none" id="sIncPrice"></button>
+                <button class="actionButton" style = "display:none" id="smallInc">--- Small Incinerator ---<p id="sIncOwned"></p></button>
+                <button class="tooltips" id="smallTip" style="display:none">Drop Down Arrow</button>
+            </div>
+            <div id = "smallToolTip" class="row" style="display: none">
+                <p>
+                    Expend a moderate amount of energy now ... to automate the burning of your smaller possessions! (Allows you to passively burn your possessions... lowering your worldy attachment)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="mainContain">
+        <div class="mainBox">
+            <div class="row">
+                <p>Anti-Meditations</p>
+            </div>
+            
+            <div class="row">
+                <button class="price" id="clickPrice"></button>
+                <button class="actionButton" id="baseClickUp">More is less.</button>
+                <button class="tooltips" id="baseClickTip">Drop Down Arrow</button>
+            </div>
+            
+        </div>
+        
+        <div class="mainBox">
+            
+        </div>
+        
+        <div class="mainBox">
+            
+        </div>
+    </div>
+    
+    <div id="clockBox">
+        <span id="clockText">Test Stuff</span>
+    </div>
+    
+    
+    <script src="script.js"></script>
+</body> 
+</html>
