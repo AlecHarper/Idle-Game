@@ -9,6 +9,12 @@ let lastDay = null;
 
 const doNothing = document.getElementById("doNothing");
 
+const clickBuildCount = document.getElementById("clickOwned");
+const baseClickPrice = document.getElementById("clickPrice");
+const baseClickUp = document.getElementById("baseClickUp");
+const clickTip = document.getElementById("baseClickTip");
+const clickToolTip = document.getElementById("baseToolTip");
+
 const lessBuildCount = document.getElementById("lessOwned");
 const lessPrice = document.getElementById("lessPrice");
 const lessIsMore = document.getElementById("lessIs");
@@ -43,11 +49,14 @@ burnPerDay = document.getElementById("burnPer");
 burnPerDay.innerText = burnPer;
 
 lessOwned = 0;
-lessBuildCount.innerText = "Owned = " + lessOwned;
+lessBuildCount.innerText = "Times Performed = " + lessOwned;
 let lessCurrPrice = Math.ceil(10 * Math.pow(1.09, lessOwned));
 lessPrice.innerText = lessCurrPrice;
 
-
+let clickUpOwned = 0;
+let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
+baseClickPrice.innerText = clickUpPrice;
+clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
 
 doNothing.addEventListener("click", () => {
     worldyAttachment += base_per_click + (base_per_click * click_mult);
@@ -97,6 +106,24 @@ smallTip.addEventListener("click", () => {
     }
 });
 
+baseClickUp.addEventListener("click", () => {
+    if (Math.abs(worldyAttachment) >= clickUpPrice) {
+        worldyAttachment += clickUpPrice;
+        clickUpOwned += 1;
+        clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
+        updateVariables();
+    }
+});
+
+clickTip.addEventListener("click", () => {
+     if (clickToolTip.style.display == "none") {
+        clickToolTip.style.display = "block";
+    }
+    else {
+        clickToolTip.style.display = "none";
+    }
+});
+
 function updateClock() {
     const secondsElapsed = Math.floor((Date.now() - startTime) / 1000);
     const days = Math.floor(secondsElapsed / 2);
@@ -111,6 +138,7 @@ function updateClock() {
 
 function updateVariables() {
     clickMult.innerText = (click_mult * 100).toFixed(0) + " percent";
+    base_per_click = -1 * (1 + clickUpOwned);
     baseClick.innerText = base_per_click;
     attachmentTracker.innerText = worldyAttachment.toFixed(2);
     gainPer = base_per_click + (base_per_click * click_mult);
@@ -118,10 +146,14 @@ function updateVariables() {
     burnPer = sIncCount + lIncCount;
     burnPerDay.innerText = burnPer;
     lessPrice.innerText = lessCurrPrice;
-    lessBuildCount.innerText = "Owned = " + lessOwned;
+    lessBuildCount.innerText = "Times Performed = " + lessOwned;
     sIncPrice.innerText = sIncCurrPrice;
     sIncOwned.innerText = "Owned = " + sIncCount;
+    baseClickPrice.innerText = clickUpPrice;
+    clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
 
+
+    //Reveal new mechanics once a certain threshold has been met.
     if (worldyAttachment <= -10) {
         lessPrice.style.display = "inline-block";
         lessIsMore.style.display = "inline-block";
@@ -134,6 +166,14 @@ function updateVariables() {
         smallTip.style.display = "inline-block";
     }
 
+    if (worldyAttachment <= -250) {
+        baseClickPrice.style.display = "inline-block";
+        baseClickUp.style.display = "inline-block";
+        clickTip.style.display = "inline-block";
+    }
+
+    
+    // Change the color of associated price buttons to indicate purchase availabilty.
     if (Math.abs(worldyAttachment) >= lessCurrPrice) {
         lessPrice.style.backgroundColor = "green";
     }
@@ -148,12 +188,20 @@ function updateVariables() {
         sIncPrice.style.backgroundColor = "red";
     }
 
+    if (Math.abs(worldyAttachment) >= clickUpPrice) {
+        baseClickPrice.style.backgroundColor = "green";
+    }
+    else {
+        baseClickPrice.style.backgroundColor = "red";
+    }
+
 
 
 
 
 }
 
+//Function is called on every new day. A new day is called every 10 seconds.
 function newDay () {
     worldyAttachment += -(burnPer);
     updateVariables();
