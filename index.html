@@ -15,14 +15,33 @@
         <div id="attachmentTracker"></div>
     </div>
     
-    <!-- Flavor Text -->
-    <div id="tickerBox">
-        <span id="tickerTrack"></span>
-    </div>
-
-
-    <div class="mainContain">
-        <div class="mainBox">
+    <!-- Main Play Area  -->
+    <div class="mainContainer">
+        <!-- Left Column  -->
+        <div class="mainColumn">
+            <!-- Active Abilities -->
+            <div class = "row">
+                <p class = "storeHeader">--- Amplify Your Descent ---</p>
+            </div>
+            <div class = "row">
+                <button class = "price" id="bingePrice"></button>
+                <button class = "actionButton" id="bingeAction">Binge Smoke</button>
+                <button class = "tooltips" id="bingeTip"><img src = "assets/dropDownArrow.png" alt="Broken Image"></button>
+            </div>
+            <div id="bingeToolTip" class = "row">
+                <p>
+                    You'll need to recover after this... (This is an ACTIVE ABILITY. It will increase your Click Multiplier by 1000%. This does not affect auto-clickers. Can be used every three minutes.)
+                </p>        
+            </div>
+            
+            <!-- Current Goals -->
+            <div class="row">
+                <p class="storeHeader">
+                    --- Current Goals ---
+                </p>
+            </div>
+            
+            <!-- Stat Box  -->
             <div class="row">
                 <p class = "storeHeader">
                     --- Stats ---
@@ -48,80 +67,8 @@
                 <p>Total Possessions Burned:</p>
                 <p id="totalBurned"></p>
             </div>
-        </div>
 
-        <div class="main">
-            <button class="actionButton" id="doNothing"><img src = "assets/DoNot.png" alt="BROKE IMAGE"></button>
-        </div>
-
-        <div class="mainBox">
-            <div class = "row">
-                <p class = "storeHeader">--- Amplify Your Descent ---</p>
-                <p class = "storeHeader">*not built yet*</p>
-            </div>
-            <div class = "row">
-                <button class = "price" id="bingePrice"></button>
-                <button class = "actionButton" id="bingeAction">Binge Smoke</button>
-                <button class = "tooltips" id="bingeTip"><img src = "assets/dropDownArrow.png" alt="Broken Image"></button>
-            </div>
-            <div id="bingeToolTip" class = "row">
-                <p>
-                    You'll need to recover after this... (This is an ACTIVE ABILITY. It will increase your Click Multiplier by 1000%. This does not affect auto-clickers. Can be used every three minutes.)
-                </p>        
-            </div>
-
-            
-            
-            <div class="row">
-                <p class = "storeHeader">--- Possession Disowning ---</p>
-            </div>
-            
-            <!-- Small Incinerators -->
-            <div class="row">
-                <button class="price" style = "display:none" id="sIncPrice"></button>
-                <button class="actionButton" style = "display:none" id="smallInc">--- Small Incinerator ---<p id="sIncOwned"></p></button>
-                <button class="tooltips" id="smallTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
-            </div>
-            <div id = "smallToolTip" class="row" style="display: none">
-                <p>
-                    Load a small incinerator full of your possessions. (Allows you to burn +10 possessions a day. This lowers your Wordly Attachment.)
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-    <div class="mainContain">
-        <div class="mainBox">
-            <div class="row">
-                <p class="storeHeader">--- Permanent Downgrades ---</p>
-            </div>
-            <!-- Less Is More-->
-            <div class="row">
-                <button class="price" style = "display:none" id="lessPrice"></button>
-                <button class="actionButton" style = "display:none" id="lessIs">--- More is less ---<p id="lessOwned"></p></button>
-                <button class="tooltips" id="lessTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
-            </div>
-            <div id = "lessToolTip" class="row" style="display: none">
-                <p>
-                    Ponder ways to do less. (Increases click multiplier by 5%)
-                </p>
-            </div>
-            <!-- Increase Click Power -->
-            <div class="row">
-                <button class="price" id="clickPrice" style= "display:none"></button>
-                <button class="actionButton" id="baseClickUp" style="display:none">--- Anti-Meditate ---<p id="clickOwned"></p></button>
-                <button class="tooltips" id="baseClickTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
-            </div>
-            <div id = "baseToolTip" class ="row" style="display:none">
-                <p>
-                    Intensely meditate on letting go. (Base gain per click +1)
-                </p>
-            </div>
-        
-        </div>
-        
-        <div class="mainBox">
+            <!-- Music Player  -->
             <div class = "row">
                 <span class="storeHeader" id="prefix" style="display:none">--- Current Track ---<span class = "storeHeader" style="display:none" id="currentTrack"></span></span>
             </div>
@@ -134,7 +81,63 @@
             </div>
         </div>
         
-        <div class="mainBox">
+        <!-- DO NOTHING COLUMN-->
+        <div class="mainColumn">
+            <button id="doNothing"><img src = "assets/DoNot.png" alt="BROKE IMAGE"></button>
+        
+            
+            <!-- Flavor Text -->
+            <div id="tickerBox">
+                <span id="tickerTrack"></span>
+            </div>
+        </div>
+        
+        <!-- Right Column     -->
+        <div class="mainColumn">
+             <!-- Downgrades -->
+            <div class="row">
+                <p class="storeHeader">--- Permanent Downgrades ---</p>
+            </div>
+            <!-- Less Is More-->
+            <div class="row">
+                <button class="price" style = "display:none" id="lessPrice"></button>
+                <button class="actionButton" style = "display:none" id="lessIs">--- More is less ---<span class="countInfo" id="lessOwned"></span></button>
+                <button class="tooltips" id="lessTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+            </div>
+            <div id = "lessToolTip" class="row" style="display: none">
+                <p>
+                    Ponder ways to do less. (Increases click multiplier by 5%)
+                </p>
+            </div>
+            <!-- Increase Click Power -->
+            <div class="row">
+                <button class="price" id="clickPrice" style= "display:none"></button>
+                <button class="actionButton" id="baseClickUp" style="display:none">--- Anti-Meditate ---<span class="countInfo" id="clickOwned"></span></button>
+                <button class="tooltips" id="baseClickTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+            </div>
+            <div id = "baseToolTip" class ="row" style="display:none">
+                <p>
+                    Intensely meditate on letting go. (Base gain per click +1)
+                </p>
+            </div>
+            
+            <!-- Possession Disowning  -->
+            <div class="row">
+                <p class = "storeHeader">--- Possession Disowning ---</p>
+            </div>
+            <!-- Small Incinerators -->
+            <div class="row">
+                <button class="price" style = "display:none" id="sIncPrice"></button>
+                <button class="actionButton" style = "display:none" id="smallInc">--- Small Incinerator ---<span class="countInfo" id="sIncOwned"></span></button>
+                <button class="tooltips" id="smallTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+            </div>
+            <div id = "smallToolTip" class="row" style="display: none">
+                <p>
+                    Load a small incinerator full of your possessions. (Allows you to burn +10 possessions a day. This lowers your Wordly Attachment.)
+                </p>
+            </div>
+            
+            <!-- Nicotine Store  -->
             <div class="row">
                 <p class = "storeHeader">
                     --- Nicotine Usage ---
@@ -142,7 +145,7 @@
             </div>
             <div class="row">
                 <button class="price" id="cigPrice" style= "display:none"></button>
-                <button class="actionButton" id="cigBuy" style="display:none">--- Smoke a Cigarette ---<p id="cigSmoked"></p></button>
+                <button class="actionButton" id="cigBuy" style="display:none">--- Smoke a Cigarette ---<span class="countInfo" id="cigSmoked"></span></button>
                 <button class="tooltips" id="cigTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
             </div>
             <div id = "cigToolTip" class ="row" style="display:none">
@@ -150,14 +153,10 @@
                     Smoke a cigarette. This won't benefit you. (+1 autoclick per second)
                 </p>
             </div>
-
-
-
-        
         </div>
-    </div>
+    </div> 
+    
     <hr>
-
     <div id="clockBox">
         <span id="clockText"></span>
     </div>

@@ -1,13 +1,14 @@
 body {
     background-color: #1b0404;
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-bottom: 100px;
 }
 
 #scoreboard {
-    top: 0;                              
-    width: 100%;           
+    position: sticky;                              
+    top: 0;
+    width: 100%;    
     font-size: 4rem;       
     font-weight: bold;
     text-align: center;    
@@ -15,47 +16,40 @@ body {
 }
 
 #tickerBox {
-    position: sticky;
-    top: 0;
+    position: fixed;
     text-align: center;
+    transform: translateY(500px);
+
+
 }
 
 #tickerTrack {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.75rem;
     opacity: 1;
     transition: 1s ease;
 }
 
-
-.mainContain {
+.mainContainer {
     display: flex;
     width: 100%;
-    gap: 10px;
+    justify-content: space-evenly;
 }
 
-.mainBox {
+.mainColumn {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    /*
-    border-radius: 20px;
-    border: 1px solid pink;
-    */
-    padding: 5px;
-}
-
-.main {
-    display: flex;
     width: 33%;
+    flex-direction: column;
+    align-items: center;  
 }
 
-.main .actionButton {
-    width: 250px;
-    height: 250px;
+#doNothing {
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
-    flex: 0 0 auto;
-    margin: auto;
+    align-self: center;
+    position: fixed;
+    transform: translateY(100px);
 }
 
 #doNothing img {
@@ -66,6 +60,7 @@ body {
 
 .row {
     display:flex;
+    width: 90%;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -84,22 +79,19 @@ body {
 .tooltips {
     flex: 0.1;
     border-radius: 15px;
-    height: 75px;
+    height: 50px;
 }
 
 .price {
     flex: 0.1;
     border-radius: 15px;
-    height: 75px;
+    height: 50px;
 }
 
 #clockBox {
     position: fixed;
     bottom: 0;
     height: 100px;
-    /*
-    border: 1px solid pink;
-    */
     display: flex;
     width: 100%;
     justify-content: center;
@@ -128,4 +120,13 @@ body {
 #volumeSlider {
     margin-top: 20px;
     transform: scale(2.0);
+}
+
+.countInfo {
+    display: block;
+}
+
+.filler {
+    width: 200px;
+    height: 200px;
 }
