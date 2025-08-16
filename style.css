@@ -14,6 +14,20 @@ body {
     background-color: #111; 
 }
 
+#tickerBox {
+    position: sticky;
+    top: 0;
+    text-align: center;
+}
+
+#tickerTrack {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.75rem;
+    opacity: 1;
+    transition: 1s ease;
+}
+
+
 .mainContain {
     display: flex;
     width: 100%;

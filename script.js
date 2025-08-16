@@ -1,4 +1,4 @@
-let worldyAttachment = 0;
+let worldyAttachment = 11;
 
 let beginGame = false; 
 let startTime = null;
@@ -72,6 +72,7 @@ let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
 cigPrice.innerText = cig_Price;
 cigSmoked.innerText = "Cigs Smoked = " + cig_Smoked;
 
+/*      Music Handling Set-Up          */         
 const playlist = [
     "audio/ambient1.mp3",
     "audio/ambient2.mp3",
@@ -81,7 +82,8 @@ const playlist = [
     "audio/shadows-in-the-static.mp3",
     "audio/dark-jazz.mp3",
     "audio/robot-funeral.mp3",
-    "audio/paper-heart.mp3"
+    "audio/paper-heart.mp3",
+    "audio/neon-echoes.mp3"
 ];
 
 let currentTrack = 0;
@@ -91,6 +93,25 @@ const bgm = document.getElementById("bgm");
 const bgmsource = document.getElementById("bgm-source");
 const volumeSlider = document.getElementById("volumeSlider");
 bgm.volume = volumeSlider.value;
+
+/*      Flavor Text Set-Up       */
+const flavorTextList = [
+    "It's over...",
+    "Just ... stop",
+    "Could you ever?",
+    "Test",
+    "sample",
+    "another sample"
+]
+const tickerTrack = document.getElementById("tickerTrack");
+let currentTick = -1;
+
+
+
+
+
+
+
 
 doNothing.addEventListener("click", () => {
     worldyAttachment += base_per_click + (base_per_click * click_mult);
@@ -190,6 +211,9 @@ function updateClock() {
 
     if (days != lastDay) {
         lastDay = days;
+        if (days % 5 === 0) {
+            updateFlavorText();
+        }
         newDay();
     }
     smoke();
@@ -223,7 +247,7 @@ function updateVariables() {
 
 
     //Reveal new mechanics once a certain threshold has been met.
-    if (worldyAttachment <= -10) {
+    if (worldyAttachment <= -5) {
         lessPrice.style.display = "inline-block";
         lessIsMore.style.display = "inline-block";
         lessTip.style.display = "inline-block";
@@ -282,11 +306,24 @@ function updateVariables() {
 }
 
 //Function is called on every new day. A new day is called every 10 seconds.
-function newDay () {
+function newDay() {
     worldyAttachment += -(burnPer);
     total_Burned += burnPer;
     totalBurned.innerText = total_Burned;
     updateVariables();
+}
+
+function updateFlavorText() {
+    tickerTrack.style.opacity = 0;
+    
+    setTimeout(() => {
+        currentTick++;
+        if (currentTick >= flavorTextList.length) {
+            currentTick = 0;
+        }
+        tickerTrack.innerText = flavorTextList[currentTick];
+        tickerTrack.style.opacity = 1;
+    }, 1000);
 }
 
 const songName = document.getElementById("currentTrack");
