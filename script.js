@@ -130,7 +130,7 @@ doNothing.addEventListener("click", () => {
         startTime = Date.now();
         setInterval(updateClock, 1000);
         updateClock();
-        playTrack(Math.floor(Math.random() * playlist.length));
+        playTrack(1);
     }
 });
 
