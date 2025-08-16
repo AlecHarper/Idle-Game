@@ -2,7 +2,7 @@ let worldyAttachment = 0;
 
 let beginGame = false; 
 let startTime = null;
-
+//test comment
 const clock = document.getElementById("clockText");
 const attachmentTracker = document.getElementById("attachmentTracker");
 let lastDay = null;
