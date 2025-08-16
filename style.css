@@ -24,8 +24,10 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
+    /*
     border-radius: 20px;
     border: 1px solid pink;
+    */
     padding: 5px;
 }
 
@@ -81,7 +83,9 @@ body {
     position: fixed;
     bottom: 0;
     height: 100px;
+    /*
     border: 1px solid pink;
+    */
     display: flex;
     width: 100%;
     justify-content: center;
@@ -98,12 +102,11 @@ body {
     text-align: center; 
 }
 
-.musictext {
-    font-size: larger;
-    text-align: center;
-    margin: auto;
-}
 
 .storeHeader {
     font-size: 2rem;
+}
+
+#prefix {
+    padding-top: 30px;
 }

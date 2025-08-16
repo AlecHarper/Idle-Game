@@ -47,12 +47,15 @@ gainPerClick.innerText = gainPer;
 
 let sIncCount = 0;
 let lIncCount = 0;
-let sIncCurrPrice = Math.ceil(50 * Math.pow(1.11, sIncCount));
+let sIncCurrPrice = Math.ceil(50 * Math.pow(1.35, sIncCount));
 sIncPrice.innerText = sIncCurrPrice;
 sIncOwned.innerText = "Owned = 0";
-let burnPer = sIncCount + lIncCount;
+let burnPer = (sIncCount * 10) + (lIncCount * 50);
 burnPerDay = document.getElementById("burnPer");
 burnPerDay.innerText = burnPer;
+let total_Burned = 0;
+const totalBurned = document.getElementById("totalBurned");
+totalBurned.innerText = total_Burned;
 
 lessOwned = 0;
 lessBuildCount.innerText = "Times Performed = " + lessOwned;
@@ -124,7 +127,7 @@ smallInc.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= sIncCurrPrice) {
         worldyAttachment += sIncCurrPrice;
         sIncCount += 1;
-        sIncCurrPrice = Math.ceil(50 * Math.pow(1.11, sIncCount));
+        sIncCurrPrice = Math.ceil(50 * Math.pow(1.35, sIncCount));
         updateVariables();
     }
 });
@@ -201,7 +204,7 @@ function updateVariables() {
     attachmentTracker.innerText = worldyAttachment.toFixed(2);
     gainPer = base_per_click + (base_per_click * click_mult);
     gainPerClick.innerText = gainPer.toFixed(2);
-    burnPer = sIncCount + lIncCount;
+    burnPer = (sIncCount * 10) + (lIncCount * 50);
     burnPerDay.innerText = burnPer;
     lessPrice.innerText = lessCurrPrice;
     lessBuildCount.innerText = "Times Performed = " + lessOwned;
@@ -276,6 +279,8 @@ function updateVariables() {
 //Function is called on every new day. A new day is called every 10 seconds.
 function newDay () {
     worldyAttachment += -(burnPer);
+    total_Burned += burnPer;
+    totalBurned.innerText = total_Burned;
     updateVariables();
 }
 
