@@ -58,6 +58,8 @@ let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
 baseClickPrice.innerText = clickUpPrice;
 clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
 
+let musicStarted = false;
+
 doNothing.addEventListener("click", () => {
     worldyAttachment += base_per_click + (base_per_click * click_mult);
     updateVariables();
@@ -67,6 +69,16 @@ doNothing.addEventListener("click", () => {
         setInterval(updateClock, 1000);
         updateClock();
     }
+
+    //start the music
+    if (!musicStarted) {
+        const bgm = document.getElementById("bgm");
+        bgm.play();
+        musicStarted = true;
+    }
+
+
+
 });
 
 lessIsMore.addEventListener("click", () => {
