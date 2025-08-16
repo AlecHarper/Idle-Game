@@ -1,10 +1,11 @@
-let worldyAttachment = 11;
+let worldyAttachment = 1000000;
 
 let beginGame = false; 
 let startTime = null;
 //test comment
 const clock = document.getElementById("clockText");
 const attachmentTracker = document.getElementById("attachmentTracker");
+attachmentTracker.innerText = worldyAttachment.toFixed(2);
 let lastDay = null;
 
 const doNothing = document.getElementById("doNothing");
@@ -78,7 +79,6 @@ const playlist = [
     "audio/ambient2.mp3",
     "audio/shattered-glass.mp3",
     "audio/through-the-fog.mp3",
-    "audio/bright-horizon.mp3",
     "audio/shadows-in-the-static.mp3",
     "audio/dark-jazz.mp3",
     "audio/robot-funeral.mp3",
@@ -87,7 +87,6 @@ const playlist = [
 ];
 
 let currentTrack = 0;
-let musicStarted = false;
 
 const bgm = document.getElementById("bgm");
 const bgmsource = document.getElementById("bgm-source");
@@ -106,26 +105,31 @@ const flavorTextList = [
 const tickerTrack = document.getElementById("tickerTrack");
 let currentTick = -1;
 
-
-
-
-
-
+/*      Pre-Game Alerts     */
+const introStinger = document.getElementById("introStinger");
 
 
 doNothing.addEventListener("click", () => {
-    worldyAttachment += base_per_click + (base_per_click * click_mult);
-    updateVariables();
-    if (beginGame == false) {
+    if (beginGame == true) {
+        worldyAttachment += base_per_click + (base_per_click * click_mult);
+        updateVariables();
+    }
+    else if (beginGame == false && worldyAttachment > 1) {
+        worldyAttachment = 0;
+        attachmentTracker.innerText = worldyAttachment.toFixed(2);
+        introStinger.currentTime = 0;
+        introStinger.play();
+        setTimeout(() => {
+            alert("Poof");
+        }, 100);
+    }
+    else if (beginGame == false) {
+        worldyAttachment--;
+        attachmentTracker.innerText = worldyAttachment.toFixed(2);
         beginGame = true;
         startTime = Date.now();
         setInterval(updateClock, 1000);
         updateClock();
-    }
-
-    //start the music
-    if (!musicStarted) {
-        musicStarted = true;
         playTrack(Math.floor(Math.random() * playlist.length));
     }
 });
