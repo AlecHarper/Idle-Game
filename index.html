@@ -89,7 +89,13 @@
         </div>
         
         <div class="mainBox">
-            
+            <div class = "row">
+                <span class="musictext" id="prefix" style="display:none">--- Current Track ---<span class = "musictext" style="display:none" id="currentTrack"></span></span>
+            </div>
+            <div class = "row">
+                <button class="actionButton" id="music1" style="display: none">Previous Song</button>
+                <button class="actionButton" id="music2" style="display: none">Next Song</button>
+            </div>
         </div>
         
         <div class="mainBox">
@@ -100,8 +106,8 @@
         <span id="clockText"></span>
     </div>
     
-    <audio id="bgm" loop>
-        <source src="audio/ambient1.mp3" type="audio/mpeg">
+    <audio id="bgm">
+        <source id="bgm-source" src="" type="audio/mpeg">
     </audio>
 
 

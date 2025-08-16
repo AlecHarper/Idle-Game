@@ -80,3 +80,9 @@ body {
     background-color: rgba(17, 17, 17, 1.0);
     pointer-events: auto;
 }
+
+.musictext {
+    font-size: larger;
+    text-align: center;
+    margin: auto;
+}

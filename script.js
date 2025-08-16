@@ -58,7 +58,20 @@ let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
 baseClickPrice.innerText = clickUpPrice;
 clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
 
+const playlist = [
+    "audio/ambient1.mp3",
+    "audio/ambient2.mp3",
+    "audio/shattered-glass.mp3",
+    "audio/through-the-fog.mp3",
+    "audio/bright-horizon.mp3",
+    "audio/shadows-in-the-static.mp3"
+];
+
+let currentTrack = 0;
 let musicStarted = false;
+
+const bgm = document.getElementById("bgm");
+const bgmsource = document.getElementById("bgm-source");
 
 doNothing.addEventListener("click", () => {
     worldyAttachment += base_per_click + (base_per_click * click_mult);
@@ -72,13 +85,9 @@ doNothing.addEventListener("click", () => {
 
     //start the music
     if (!musicStarted) {
-        const bgm = document.getElementById("bgm");
-        bgm.play();
         musicStarted = true;
+        playTrack(Math.floor(Math.random() * playlist.length));
     }
-
-
-
 });
 
 lessIsMore.addEventListener("click", () => {
@@ -219,10 +228,52 @@ function newDay () {
     updateVariables();
 }
 
+const songName = document.getElementById("currentTrack");
+const prefix = document.getElementById("prefix");
+const lastSong = document.getElementById("music1");
+const nextSong = document.getElementById("music2");
 
+let song = null;
 
+function playTrack(index) {
+    currentTrack = index;
+    song = playlist[index];
+    songName.innerText = song;
+    prefix.style.display = "block";
+    songName.style.display = "block";
+    lastSong.style.display = "inline-block";
+    nextSong.style.display = "inline-block";
+    bgmsource.src = playlist[currentTrack];
+    bgm.load();
+    bgm.play();
+}
 
+bgm.addEventListener("ended", () => {
+    let nextTrack;
+    
+    do {
+        nextTrack = Math.floor(Math.random() * playlist.length);
+    } 
+    while (nextTrack === currentTrack && playlist.length > 1); 
+    
+    playTrack(nextTrack);
+});
 
+lastSong.addEventListener("click" , () => {
+    currentTrack -= 1;
+    if (currentTrack < 0) {
+        currentTrack = playlist.length - 1;
+    }
+    playTrack(currentTrack);
+});
+
+nextSong.addEventListener("click", () => {
+    currentTrack += 1;
+    if (currentTrack >= playlist.length){
+        currentTrack = 0
+    }
+    playTrack(currentTrack);
+});
 
 
 
