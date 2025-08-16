@@ -27,6 +27,12 @@ const smallInc = document.getElementById("smallInc");
 const smallTip = document.getElementById("smallTip");
 const smallToolTip = document.getElementById("smallToolTip");
 
+const cigPrice = document.getElementById("cigPrice");
+const cigBuy = document.getElementById("cigBuy");
+const cigSmoked = document.getElementById("cigSmoked");
+const cigTip = document.getElementById("cigTip");
+const cigToolTip = document.getElementById("cigToolTip");
+
 let base_per_click = -1;
 const baseClick = document.getElementById("baseClick");
 baseClick.innerText = base_per_click;
@@ -57,6 +63,11 @@ let clickUpOwned = 0;
 let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
 baseClickPrice.innerText = clickUpPrice;
 clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
+
+let cig_Smoked = 0;
+let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
+cigPrice.innerText = cig_Price;
+cigSmoked.innerText = "Cigs Smoked = " + cig_Smoked;
 
 const playlist = [
     "audio/ambient1.mp3",
@@ -145,9 +156,27 @@ clickTip.addEventListener("click", () => {
     }
 });
 
+cigBuy.addEventListener("click", () => {
+    if (Math.abs(worldyAttachment) >= cig_Price) {
+        worldyAttachment += cig_Price;
+        cig_Smoked += 1;
+        cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
+        updateVariables();
+    }
+});
+
+cigTip.addEventListener("click", () => {
+    if (cigToolTip.style.display == "none") {
+        cigToolTip.style.display = "block";
+    }
+    else {
+        cigToolTip.style.display = "none";
+    }
+});
+
 function updateClock() {
     const secondsElapsed = Math.floor((Date.now() - startTime) / 1000);
-    const days = Math.floor(secondsElapsed / 2);
+    const days = Math.floor(secondsElapsed / 10);
     clock.innerText =
         `Days since: ${days}`;
 
@@ -155,7 +184,15 @@ function updateClock() {
         lastDay = days;
         newDay();
     }
+    smoke();
 }
+
+function smoke() {
+    worldyAttachment += gainPer * cig_Smoked;
+    updateVariables();
+}
+
+
 
 function updateVariables() {
     clickMult.innerText = (click_mult * 100).toFixed(0) + " percent";
@@ -172,6 +209,9 @@ function updateVariables() {
     sIncOwned.innerText = "Owned = " + sIncCount;
     baseClickPrice.innerText = clickUpPrice;
     clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
+    cigPrice.innerText = cig_Price;
+    cigSmoked.innerText = "Cigs Smoked = " + cig_Smoked;
+    
 
 
     //Reveal new mechanics once a certain threshold has been met.
@@ -193,7 +233,12 @@ function updateVariables() {
         clickTip.style.display = "inline-block";
     }
 
-    
+    if (worldyAttachment <= -1000) {
+        cigPrice.style.display = "inline-block";
+        cigBuy.style.display = "inline-block";
+        cigTip.style.display = "inline-block";
+    }
+
     // Change the color of associated price buttons to indicate purchase availabilty.
     if (Math.abs(worldyAttachment) >= lessCurrPrice) {
         lessPrice.style.backgroundColor = "green";
@@ -216,6 +261,12 @@ function updateVariables() {
         baseClickPrice.style.backgroundColor = "red";
     }
 
+    if (Math.abs(worldyAttachment) >= cig_Price) {
+        cigPrice.style.backgroundColor = "green";
+    }
+    else {
+        cigPrice.style.backgroundColor = "red";
+    }
 
 
 

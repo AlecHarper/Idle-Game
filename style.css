@@ -42,10 +42,21 @@ body {
     margin: auto;
 }
 
+#doNothing img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .row {
     display:flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
+}
+
+.row p {
+    text-align: center;
 }
 
 .actionButton {
@@ -81,8 +92,18 @@ body {
     pointer-events: auto;
 }
 
+#clockText {
+    font-size: 4rem;       
+    font-weight: bold;
+    text-align: center; 
+}
+
 .musictext {
     font-size: larger;
     text-align: center;
     margin: auto;
+}
+
+.storeHeader {
+    font-size: 2rem;
 }

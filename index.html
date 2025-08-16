@@ -17,6 +17,11 @@
     <div class="mainContain">
         <div class="mainBox">
             <div class="row">
+                <p class = "storeHeader">
+                    --- Stats ---
+                </p>
+            </div>
+            <div class="row">
                 <p>Base Click Power:</p>
                 <p id="baseClick"></p>
             </div>
@@ -35,12 +40,12 @@
         </div>
 
         <div class="main">
-            <button class="actionButton" id="doNothing"><img src = "assets/mountain.png" alt="BROKE IMAGE"></button>
+            <button class="actionButton" id="doNothing"><img src = "assets/DoNot.png" alt="BROKE IMAGE"></button>
         </div>
 
         <div class="mainBox">
             <div class="row">
-                <p>Buildings</p>
+                <p class = "storeHeader">--- Possession Disowning ---</p>
             </div>
             
             <!-- Small Incinerators -->
@@ -61,7 +66,7 @@
     <div class="mainContain">
         <div class="mainBox">
             <div class="row">
-                <p>Permanent Downgrades</p>
+                <p class="storeHeader">--- Permanent Downgrades ---</p>
             </div>
             <!-- Less Is More-->
             <div class="row">
@@ -99,6 +104,25 @@
         </div>
         
         <div class="mainBox">
+            <div class="row">
+                <p class = "storeHeader">
+                    --- Nicotine Usage ---
+                </p>
+            </div>
+            <div class="row">
+                <button class="price" id="cigPrice" style= "display:none"></button>
+                <button class="actionButton" id="cigBuy" style="display:none">--- Smoke a Cigarette ---<p id="cigSmoked"></p></button>
+                <button class="tooltips" id="cigTip" style="display:none">Drop Down Arrow</button>
+            </div>
+            <div id = "cigToolTip" class ="row" style="display:none">
+                <p>
+                    Smoke a cigarette. This won't benefit you. (+1 autoclick per second)
+                </p>
+            </div>
+
+
+
+        
         </div>
     </div>
     
