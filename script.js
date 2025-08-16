@@ -1,11 +1,11 @@
-let worldyAttachment = 1000000;
+let worldyAttachment = 0;
 
 let beginGame = false; 
 let startTime = null;
 //test comment
 const clock = document.getElementById("clockText");
 const attachmentTracker = document.getElementById("attachmentTracker");
-attachmentTracker.innerText = worldyAttachment.toFixed(2);
+attachmentTracker.innerText = "Just Fine";
 let lastDay = null;
 
 const doNothing = document.getElementById("doNothing");
@@ -114,7 +114,7 @@ doNothing.addEventListener("click", () => {
         worldyAttachment += base_per_click + (base_per_click * click_mult);
         updateVariables();
     }
-    else if (beginGame == false && worldyAttachment > 1) {
+    else {
         worldyAttachment = 0;
         attachmentTracker.innerText = worldyAttachment.toFixed(2);
         introStinger.currentTime = 0;
@@ -122,10 +122,6 @@ doNothing.addEventListener("click", () => {
         setTimeout(() => {
             alert("Poof");
         }, 100);
-    }
-    else if (beginGame == false) {
-        worldyAttachment--;
-        attachmentTracker.innerText = worldyAttachment.toFixed(2);
         beginGame = true;
         startTime = Date.now();
         setInterval(updateClock, 1000);
