@@ -89,6 +89,8 @@ let musicStarted = false;
 
 const bgm = document.getElementById("bgm");
 const bgmsource = document.getElementById("bgm-source");
+const volumeSlider = document.getElementById("volumeSlider");
+bgm.volume = volumeSlider.value;
 
 doNothing.addEventListener("click", () => {
     worldyAttachment += base_per_click + (base_per_click * click_mult);
@@ -227,19 +229,19 @@ function updateVariables() {
         lessTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -50) {
+    if (worldyAttachment <= -35) {
         sIncPrice.style.display = "inline-block";
         smallInc.style.display = "inline-block";
         smallTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -250) {
+    if (worldyAttachment <= -175) {
         baseClickPrice.style.display = "inline-block";
         baseClickUp.style.display = "inline-block";
         clickTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -1000) {
+    if (worldyAttachment <= -700) {
         cigPrice.style.display = "inline-block";
         cigBuy.style.display = "inline-block";
         cigTip.style.display = "inline-block";
@@ -302,6 +304,7 @@ function playTrack(index) {
     songName.style.display = "block";
     lastSong.style.display = "inline-block";
     nextSong.style.display = "inline-block";
+    volumeSlider.style.display = "inline-block"
     bgmsource.src = playlist[currentTrack];
     bgm.load();
     bgm.play();
@@ -334,5 +337,7 @@ nextSong.addEventListener("click", () => {
     playTrack(currentTrack);
 });
 
-
+volumeSlider.addEventListener("input" , () => {
+    bgm.volume = volumeSlider.value;
+});
 
