@@ -78,7 +78,10 @@ const playlist = [
     "audio/shattered-glass.mp3",
     "audio/through-the-fog.mp3",
     "audio/bright-horizon.mp3",
-    "audio/shadows-in-the-static.mp3"
+    "audio/shadows-in-the-static.mp3",
+    "audio/dark-jazz.mp3",
+    "audio/robot-funeral.mp3",
+    "audio/paper-heart.mp3"
 ];
 
 let currentTrack = 0;
