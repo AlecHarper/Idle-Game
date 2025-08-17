@@ -171,7 +171,7 @@ doNothing.addEventListener("click", (e) => {
         startTime = Date.now();
         setInterval(updateClock, 1000);
         updateClock();
-        playTrack(1);
+        playTrack(playlist.length - 1);
     }
 });
 
