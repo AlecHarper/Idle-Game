@@ -129,6 +129,7 @@ const playlist = [
 
 let currentTrack = 0;
 
+let musicStarted = false;
 const bgm = document.getElementById("bgm");
 const bgmsource = document.getElementById("bgm-source");
 const volumeSlider = document.getElementById("volumeSlider");
@@ -171,7 +172,6 @@ doNothing.addEventListener("click", (e) => {
         startTime = Date.now();
         setInterval(updateClock, 1000);
         updateClock();
-        playTrack(playlist.length - 1);
     }
 });
 
@@ -280,7 +280,12 @@ function updateClock() {
     clock.innerText =
         `Days since: ${days}`;
 
-    if (days != lastDay) {
+        if (days > 0 && !musicStarted) {
+            playTrack(playlist.length - 1);
+            musicStarted = true;
+        }
+    
+        if (days != lastDay) {
         lastDay = days;
         if (days % 5 === 0) {
             updateFlavorText();
