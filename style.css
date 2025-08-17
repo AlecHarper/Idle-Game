@@ -104,6 +104,14 @@ body {
     object-fit: cover;
 }
 
+#doNothing:active {
+  transform: translateY(30px) scale(0.95);
+  box-shadow: 0 0 40px rgba(255,0,0,0.9);
+  transition: transform 0.15s ease;
+}
+
+
+
 .row {
     display:flex;
     width: 90%;
