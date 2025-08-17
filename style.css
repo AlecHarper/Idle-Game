@@ -110,8 +110,6 @@ body {
   transition: transform 0.15s ease;
 }
 
-
-
 .row {
     display:flex;
     width: 90%;
@@ -124,22 +122,34 @@ body {
     text-align: center;
 }
 
+.price {
+    flex: 0.1;
+    border-radius: 15px;
+    height: 50px;
+}
+
+.imageButton {
+    position: absolute;
+    height: 64px;
+    width: 64px;
+    top: 0;
+    left: 0;
+
+}
+
 .actionButton {
     flex: 1;
     border-radius: 15px;
     height: 75px;
+    position: relative;
+    background-color: burlywood;
 }
 
 .tooltips {
     flex: 0.1;
     border-radius: 15px;
     height: 50px;
-}
-
-.price {
-    flex: 0.1;
-    border-radius: 15px;
-    height: 50px;
+    background-color: burlywood;
 }
 
 #clockBox {

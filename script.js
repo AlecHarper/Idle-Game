@@ -36,7 +36,7 @@ let lessCurrPrice = Math.ceil(10 * Math.pow(1.09, less_Owned));
 lessOwned.innerText = "Times Performed = " + less_Owned;
 lessPrice.innerText = lessCurrPrice;
 
-
+const sIncReveal = document.querySelectorAll(".sIncReveal");
 const sIncPrice = document.getElementById("sIncPrice");
 const sIncBuy = document.getElementById("sIncBuy");
 const sIncOwned = document.getElementById("sIncOwned");
@@ -269,9 +269,9 @@ function updateVariables() {
     }
 
     if (worldyAttachment <= -25) {
-        sIncPrice.style.display = "inline-block";
-        sIncBuy.style.display = "inline-block";
-        sIncTip.style.display = "inline-block";
+        sIncReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
     }
 
     if (worldyAttachment <= -125) {
