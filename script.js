@@ -219,6 +219,16 @@ cigBuy.addEventListener("click", () => {
     }
 });
 
+cigTip.addEventListener("click", () => {
+     if (cigToolTip.style.display == "none") {
+        cigToolTip.style.display = "block";
+    }
+    else {
+        cigToolTip.style.display = "none";
+    }
+});
+
+
 bingeTip.addEventListener("click", () => {
     if (bingeToolTip.style.display == "none") {
         bingeToolTip.style.display = "block";
