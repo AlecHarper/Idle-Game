@@ -21,7 +21,7 @@ const clickTip = document.getElementById("clickTip");
 const clickToolTip = document.getElementById("clickToolTip");
 
 let clickUpOwned = 0;
-let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
+let clickUpPrice = Math.ceil(250 * Math.pow(1.65, clickUpOwned));
 clickOwned.innerText = "Times Performed = " + clickUpOwned;
 clickPrice.innerText = clickUpPrice;
 
@@ -34,7 +34,7 @@ const lessTip = document.getElementById("lessTip");
 const lessToolTip = document.getElementById("lessToolTip");
 
 let less_Owned = 0;
-let lessCurrPrice = Math.ceil(10 * Math.pow(1.09, less_Owned));
+let lessCurrPrice = Math.ceil(20 * Math.pow(1.09, less_Owned));
 lessOwned.innerText = "Times Performed = " + less_Owned;
 lessPrice.innerText = lessCurrPrice;
 
@@ -60,7 +60,7 @@ const cigTip = document.getElementById("cigTip");
 const cigToolTip = document.getElementById("cigToolTip");
 
 let cig_Smoked = 0;
-let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
+let cig_Price = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
 cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
 cigPrice.innerText = cig_Price;
 
@@ -178,9 +178,9 @@ doNothing.addEventListener("click", (e) => {
 lessBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= lessCurrPrice) {
         worldyAttachment += lessCurrPrice;
-        click_mult += 0.05;
+        click_mult += 0.1;
         less_Owned += 1;
-        lessCurrPrice = Math.ceil(10 * Math.pow(1.09, less_Owned));
+        lessCurrPrice = Math.ceil(20 * Math.pow(1.09, less_Owned));
         updateVariables()
     } 
 });
@@ -216,7 +216,7 @@ clickBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= clickUpPrice) {
         worldyAttachment += clickUpPrice;
         clickUpOwned += 1;
-        clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
+        clickUpPrice = Math.ceil(250 * Math.pow(1.65, clickUpOwned));
         updateVariables();
     }
 });
@@ -234,7 +234,7 @@ cigBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= cig_Price) {
         worldyAttachment += cig_Price;
         cig_Smoked += 1;
-        cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
+        cig_Price = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
         updateVariables();
     }
 });

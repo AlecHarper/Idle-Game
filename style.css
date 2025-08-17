@@ -104,6 +104,8 @@ body {
     align-self: center;
     position: fixed;
     transform: translateY(30px);
+    outline: none;
+    user-select: none;
 }
 
 #doNothing img {
