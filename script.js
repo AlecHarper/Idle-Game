@@ -9,6 +9,8 @@ attachmentTracker.innerText = "Just Fine";
 let lastDay = null;
 
 const doNothing = document.getElementById("doNothing");
+const doNotCount = document.getElementById("doNotCount");
+let do_Not_Count = 0;
 
 /*      Upgrade Initializations     */
 const clickPrice = document.getElementById("clickPrice");
@@ -122,6 +124,7 @@ doNothing.addEventListener("click", (e) => {
     if (beginGame == true) {
         const soulLost = base_per_click + (base_per_click * click_mult);
         worldyAttachment += soulLost;
+        do_Not_Count++;
         updateVariables();
         show_Soul_Lost(e, soulLost);
     }
@@ -246,6 +249,7 @@ function updateVariables() {
     gainPerClick.innerText = gainPer.toFixed(2);
     burnPer = (sIncCount * 10) + (lIncCount * 50);
     burnPerDay.innerText = burnPer;
+    doNotCount.innerText = do_Not_Count;
     lessPrice.innerText = lessCurrPrice;
     lessOwned.innerText = "Times Performed = " + less_Owned;
     sIncPrice.innerText = sIncCurrPrice;
