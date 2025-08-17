@@ -194,3 +194,9 @@ body {
   from { transform: translateY(0); }
   to   { transform: translateY(-30px); }  
 }
+
+.basicButtonImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
