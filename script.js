@@ -64,6 +64,12 @@ let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
 cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
 cigPrice.innerText = cig_Price;
 
+
+const bingeReveal = document.querySelectorAll(".bingeReveal");
+const bingeTip = document.getElementById("bingeTip");
+const bingeToolTip = document.getElementById("bingeToolTip");
+
+
 /*      Stat Initializations        */
 let base_per_click = -1;
 const baseClick = document.getElementById("baseClick");
@@ -96,7 +102,9 @@ const playlist = [
     "audio/dark-jazz.mp3",
     "audio/robot-funeral.mp3",
     "audio/paper-heart.mp3",
-    "audio/neon-echoes.mp3"
+    "audio/neon-echoes.mp3",
+    "audio/starless-skies.mp3",
+    "audio/cosmic-joker.mp3"
 ];
 
 let currentTrack = 0;
@@ -211,14 +219,16 @@ cigBuy.addEventListener("click", () => {
     }
 });
 
-cigTip.addEventListener("click", () => {
-    if (cigToolTip.style.display == "none") {
-        cigToolTip.style.display = "block";
+bingeTip.addEventListener("click", () => {
+    if (bingeToolTip.style.display == "none") {
+        bingeToolTip.style.display = "block";
     }
     else {
-        cigToolTip.style.display = "none";
+        bingeToolTip.style.display = "none";
     }
 });
+
+
 
 function updateClock() {
     const secondsElapsed = Math.floor((Date.now() - startTime) / 1000);
@@ -245,7 +255,9 @@ function smoke() {
 let lessUnlocked = false;
 let sIncUnlocked = false;
 let clickUnlocked = false;
+
 let cigUnlocked = false;
+let bingeUnlocked = false;
 
 function updateVariables() {
     clickMult.innerText = (click_mult * 100).toFixed(0) + " percent";
@@ -285,7 +297,7 @@ function updateVariables() {
         sIncUnlocked = true;
     }
 
-    if (worldyAttachment <= -125) {
+    if (!clickUnlocked && worldyAttachment <= -125) {
         clickReveal.forEach(ele => {
             ele.style.display = "inline-block";
         });
@@ -293,12 +305,20 @@ function updateVariables() {
         clickUnlocked = true;
     }
 
-    if (worldyAttachment <= -500) {
+    if (!cigUnlocked && worldyAttachment <= -500) {
         cigReveal.forEach(ele => {
             ele.style.display = "inline-block";
         });
         cigToolTip.style.display = "block";
         cigUnlocked = true;
+    }
+
+    if (!bingeUnlocked && worldyAttachment <= -1500) {
+        bingeReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        bingeToolTip.style.display = "block";
+        bingeUnlocked = true;
     }
 
     // Change the color of associated price buttons to indicate purchase availabilty.
