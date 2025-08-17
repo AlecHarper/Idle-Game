@@ -2,7 +2,7 @@ let worldyAttachment = 0;
 
 let beginGame = false; 
 let startTime = null;
-//test comment
+
 const clock = document.getElementById("clockText");
 const attachmentTracker = document.getElementById("attachmentTracker");
 attachmentTracker.innerText = "Just Fine";
@@ -10,30 +10,56 @@ let lastDay = null;
 
 const doNothing = document.getElementById("doNothing");
 
-const clickBuildCount = document.getElementById("clickOwned");
-const baseClickPrice = document.getElementById("clickPrice");
-const baseClickUp = document.getElementById("baseClickUp");
-const clickTip = document.getElementById("baseClickTip");
-const clickToolTip = document.getElementById("baseToolTip");
+/*      Upgrade Initializations     */
+const clickPrice = document.getElementById("clickPrice");
+const clickBuy = document.getElementById("clickBuy");
+const clickOwned = document.getElementById("clickOwned");
+const clickTip = document.getElementById("clickTip");
+const clickToolTip = document.getElementById("clickToolTip");
 
-const lessBuildCount = document.getElementById("lessOwned");
+let clickUpOwned = 0;
+let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
+clickOwned.innerText = "Times Performed = " + clickUpOwned;
+clickPrice.innerText = clickUpPrice;
+
+
 const lessPrice = document.getElementById("lessPrice");
-const lessIsMore = document.getElementById("lessIs");
+const lessBuy = document.getElementById("lessBuy");
+const lessOwned = document.getElementById("lessOwned");
 const lessTip = document.getElementById("lessTip");
 const lessToolTip = document.getElementById("lessToolTip");
 
+let less_Owned = 0;
+let lessCurrPrice = Math.ceil(10 * Math.pow(1.09, less_Owned));
+lessOwned.innerText = "Times Performed = " + less_Owned;
+lessPrice.innerText = lessCurrPrice;
+
+
 const sIncPrice = document.getElementById("sIncPrice");
+const sIncBuy = document.getElementById("sIncBuy");
 const sIncOwned = document.getElementById("sIncOwned");
-const smallInc = document.getElementById("smallInc");
-const smallTip = document.getElementById("smallTip");
-const smallToolTip = document.getElementById("smallToolTip");
+const sIncTip = document.getElementById("sIncTip");
+const sIncToolTip = document.getElementById("sIncToolTip");
+
+let sIncCount = 0;
+let lIncCount = 0;
+let sIncCurrPrice = Math.ceil(50 * Math.pow(1.35, sIncCount));
+sIncPrice.innerText = sIncCurrPrice;
+sIncOwned.innerText = "Owned = 0";
+
 
 const cigPrice = document.getElementById("cigPrice");
 const cigBuy = document.getElementById("cigBuy");
-const cigSmoked = document.getElementById("cigSmoked");
+const cigOwned = document.getElementById("cigOwned");
 const cigTip = document.getElementById("cigTip");
 const cigToolTip = document.getElementById("cigToolTip");
 
+let cig_Smoked = 0;
+let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
+cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
+cigPrice.innerText = cig_Price;
+
+/*      Stat Initializations        */
 let base_per_click = -1;
 const baseClick = document.getElementById("baseClick");
 baseClick.innerText = base_per_click;
@@ -46,32 +72,14 @@ let gainPer = base_per_click + (base_per_click * click_mult);
 gainPerClick = document.getElementById("gainPer");
 gainPerClick.innerText = gainPer;
 
-let sIncCount = 0;
-let lIncCount = 0;
-let sIncCurrPrice = Math.ceil(50 * Math.pow(1.35, sIncCount));
-sIncPrice.innerText = sIncCurrPrice;
-sIncOwned.innerText = "Owned = 0";
 let burnPer = (sIncCount * 10) + (lIncCount * 50);
 burnPerDay = document.getElementById("burnPer");
 burnPerDay.innerText = burnPer;
+
 let total_Burned = 0;
 const totalBurned = document.getElementById("totalBurned");
 totalBurned.innerText = total_Burned;
-
-lessOwned = 0;
-lessBuildCount.innerText = "Times Performed = " + lessOwned;
-let lessCurrPrice = Math.ceil(10 * Math.pow(1.09, lessOwned));
-lessPrice.innerText = lessCurrPrice;
-
-let clickUpOwned = 0;
-let clickUpPrice = Math.ceil(250 * Math.pow(1.15, clickUpOwned));
-baseClickPrice.innerText = clickUpPrice;
-clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
-
-let cig_Smoked = 0;
-let cig_Price = Math.ceil(1000 * Math.pow(1.17, cig_Smoked));
-cigPrice.innerText = cig_Price;
-cigSmoked.innerText = "Cigs Smoked = " + cig_Smoked;
+    
 
 /*      Music Handling Set-Up          */         
 const playlist = [
@@ -105,10 +113,11 @@ const flavorTextList = [
 const tickerTrack = document.getElementById("tickerTrack");
 let currentTick = -1;
 
-/*      Pre-Game Alerts     */
+/*      Pre-Game Music Stinger    */
 const introStinger = document.getElementById("introStinger");
 
 
+/*      Game Loop About to Start        */
 doNothing.addEventListener("click", (e) => {
     if (beginGame == true) {
         const soulLost = base_per_click + (base_per_click * click_mult);
@@ -122,7 +131,7 @@ doNothing.addEventListener("click", (e) => {
         introStinger.currentTime = 0;
         introStinger.play();
         setTimeout(() => {
-            alert("Poof");
+            alert("**POOF**");
         }, 100);
         beginGame = true;
         startTime = Date.now();
@@ -132,12 +141,12 @@ doNothing.addEventListener("click", (e) => {
     }
 });
 
-lessIsMore.addEventListener("click", () => {
+lessBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= lessCurrPrice) {
         worldyAttachment += lessCurrPrice;
         click_mult += 0.05;
-        lessOwned += 1;
-        lessCurrPrice = Math.ceil(10 * Math.pow(1.09, lessOwned));
+        less_Owned += 1;
+        lessCurrPrice = Math.ceil(10 * Math.pow(1.09, less_Owned));
         updateVariables()
     } 
 });
@@ -151,7 +160,7 @@ lessTip.addEventListener("click", () => {
     }
 });
 
-smallInc.addEventListener("click", () => {
+sIncBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= sIncCurrPrice) {
         worldyAttachment += sIncCurrPrice;
         sIncCount += 1;
@@ -160,16 +169,16 @@ smallInc.addEventListener("click", () => {
     }
 });
 
-smallTip.addEventListener("click", () => {
-    if (smallToolTip.style.display == "none") {
-        smallToolTip.style.display = "block";
+sIncTip.addEventListener("click", () => {
+    if (sIncToolTip.style.display == "none") {
+        sIncToolTip.style.display = "block";
     }
     else {
-        smallToolTip.style.display = "none";
+        sIncToolTip.style.display = "none";
     }
 });
 
-baseClickUp.addEventListener("click", () => {
+clickBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= clickUpPrice) {
         worldyAttachment += clickUpPrice;
         clickUpOwned += 1;
@@ -238,36 +247,36 @@ function updateVariables() {
     burnPer = (sIncCount * 10) + (lIncCount * 50);
     burnPerDay.innerText = burnPer;
     lessPrice.innerText = lessCurrPrice;
-    lessBuildCount.innerText = "Times Performed = " + lessOwned;
+    lessOwned.innerText = "Times Performed = " + less_Owned;
     sIncPrice.innerText = sIncCurrPrice;
     sIncOwned.innerText = "Owned = " + sIncCount;
-    baseClickPrice.innerText = clickUpPrice;
-    clickBuildCount.innerText = "Times Performed = " + clickUpOwned;
+    clickPrice.innerText = clickUpPrice;
+    clickOwned.innerText = "Times Performed = " + clickUpOwned;
     cigPrice.innerText = cig_Price;
-    cigSmoked.innerText = "Cigs Smoked = " + cig_Smoked;
+    cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
     
 
 
     //Reveal new mechanics once a certain threshold has been met.
     if (worldyAttachment <= -5) {
         lessPrice.style.display = "inline-block";
-        lessIsMore.style.display = "inline-block";
+        lessBuy.style.display = "inline-block";
         lessTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -35) {
+    if (worldyAttachment <= -25) {
         sIncPrice.style.display = "inline-block";
-        smallInc.style.display = "inline-block";
-        smallTip.style.display = "inline-block";
+        sIncBuy.style.display = "inline-block";
+        sIncTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -175) {
-        baseClickPrice.style.display = "inline-block";
-        baseClickUp.style.display = "inline-block";
+    if (worldyAttachment <= -125) {
+        clickPrice.style.display = "inline-block";
+        clickBuy.style.display = "inline-block";
         clickTip.style.display = "inline-block";
     }
 
-    if (worldyAttachment <= -700) {
+    if (worldyAttachment <= -500) {
         cigPrice.style.display = "inline-block";
         cigBuy.style.display = "inline-block";
         cigTip.style.display = "inline-block";
@@ -289,10 +298,10 @@ function updateVariables() {
     }
 
     if (Math.abs(worldyAttachment) >= clickUpPrice) {
-        baseClickPrice.style.backgroundColor = "green";
+        clickPrice.style.backgroundColor = "green";
     }
     else {
-        baseClickPrice.style.backgroundColor = "red";
+        clickPrice.style.backgroundColor = "red";
     }
 
     if (Math.abs(worldyAttachment) >= cig_Price) {
