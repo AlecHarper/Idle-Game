@@ -89,6 +89,14 @@ body {
     align-items: center;  
 }
 
+.changeLogMain {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+}
+
+
 #doNothing {
     width: 350px;
     height: 350px;

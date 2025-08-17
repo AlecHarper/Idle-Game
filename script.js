@@ -66,6 +66,7 @@ cigPrice.innerText = cig_Price;
 
 
 const bingeReveal = document.querySelectorAll(".bingeReveal");
+const bingeAction = document.getElementById("bingeAction");
 const bingeTip = document.getElementById("bingeTip");
 const bingeToolTip = document.getElementById("bingeToolTip");
 
@@ -91,6 +92,23 @@ let total_Burned = 0;
 const totalBurned = document.getElementById("totalBurned");
 totalBurned.innerText = total_Burned;
     
+/*      Feature Unlocks     */
+let lessUnlocked = false;
+let sIncUnlocked = false;
+let clickUnlocked = false;
+
+let cigUnlocked = false;
+let bingeUnlocked = false;
+
+/*      Active Ability Cooldown Timers      */
+
+const bingeCooldown = document.getElementById("bingeCooldown");
+let binge_Cooldown;
+let bingeAvailable = false;
+let bingeActive = false;
+let bingeTimer = 0;
+
+
 
 /*      Music Handling Set-Up          */         
 const playlist = [
@@ -104,7 +122,9 @@ const playlist = [
     "audio/paper-heart.mp3",
     "audio/neon-echoes.mp3",
     "audio/starless-skies.mp3",
-    "audio/cosmic-joker.mp3"
+    "audio/cosmic-joker.mp3",
+    "audio/ashes-in-the-air.mp3",
+    "audio/end-of-the-echo.mp3"
 ];
 
 let currentTrack = 0;
@@ -228,6 +248,20 @@ cigTip.addEventListener("click", () => {
     }
 });
 
+bingeAction.addEventListener("click", () => {
+    if (bingeActive) {
+        /* Do Nothing */
+    }
+    else if (bingeAvailable) {
+        bingeActive = true;
+        bingeTimer = 15;
+        click_mult += 10;
+        updateVariables();
+    }
+
+
+});
+
 
 bingeTip.addEventListener("click", () => {
     if (bingeToolTip.style.display == "none") {
@@ -254,6 +288,27 @@ function updateClock() {
         newDay();
     }
     smoke();
+
+    if (bingeUnlocked) {
+        if (binge_Cooldown <= 0) {
+            bingeAvailable = true;
+        }
+        else {
+            binge_Cooldown--;
+        }
+    }
+
+    if (bingeActive) {
+        bingeTimer--;
+        if (bingeTimer <= 0) {
+            bingeActive = false;
+            bingeAvailable = false;
+            click_mult -= 10;
+            binge_Cooldown = 120;
+        }
+    }
+    bingeCooldown.innerText = binge_Cooldown;
+
 }
 
 function smoke() {
@@ -262,14 +317,9 @@ function smoke() {
 }
 
 
-let lessUnlocked = false;
-let sIncUnlocked = false;
-let clickUnlocked = false;
-
-let cigUnlocked = false;
-let bingeUnlocked = false;
-
 function updateVariables() {
+    
+    
     clickMult.innerText = (click_mult * 100).toFixed(0) + " percent";
     base_per_click = -1 * (1 + clickUpOwned);
     baseClick.innerText = base_per_click;
@@ -323,12 +373,13 @@ function updateVariables() {
         cigUnlocked = true;
     }
 
-    if (!bingeUnlocked && worldyAttachment <= -1500) {
+    if (!bingeUnlocked && cig_Smoked >= 2) {
         bingeReveal.forEach(ele => {
             ele.style.display = "inline-block";
         });
         bingeToolTip.style.display = "block";
         bingeUnlocked = true;
+        binge_Cooldown = 0;
     }
 
     // Change the color of associated price buttons to indicate purchase availabilty.
