@@ -101,7 +101,7 @@
         
         <!-- DO NOTHING COLUMN-->
         <div class="mainColumn">
-            <button id="doNothing"><img src = "assets/DoNot.png" alt="BROKE IMAGE"></button>
+            <button id="doNothing"><img src = "assets/DoNot.png" alt="BROKE IMAGE" draggable="false"></button>
         
             
             <!-- Flavor Text -->
@@ -118,9 +118,11 @@
             </div>
             <!-- Less Is More-->
             <div class="row">
-                <button class="price" style = "display:none" id="lessPrice"></button>
-                <button class="actionButton" style = "display:none" id="lessBuy">--- More is less ---<span class="countInfo" id="lessOwned"></span></button>
-                <button class="tooltips" id="lessTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+                <button class="price lessReveal" style = "display:none" id="lessPrice"></button>
+                <button class="actionButton lessReveal" style = "display:none" id="lessBuy">--- More is less ---<span class="countInfo" id="lessOwned"></span>
+                    <img class="imageButton lessReveal" style="display:none" src="" alt="Image Coming Soon!" >
+                </button>
+                <button class="tooltips lessReveal" id="lessTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
             </div>
             <div id = "lessToolTip" class="row" style="display: none">
                 <p>
@@ -129,9 +131,11 @@
             </div>
             <!-- Increase Click Power -->
             <div class="row">
-                <button class="price" id="clickPrice" style= "display:none"></button>
-                <button class="actionButton" id="clickBuy" style="display:none">--- Anti-Meditate ---<span class="countInfo" id="clickOwned"></span></button>
-                <button class="tooltips" id="clickTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+                <button class="price clickReveal" id="clickPrice" style= "display:none"></button>
+                <button class="actionButton clickReveal" id="clickBuy" style="display:none">--- Anti-Meditate ---<span class="countInfo" id="clickOwned"></span>
+                    <img class="imageButton clickReveal" style="display:none" src="" alt="Image Coming Soon!" >
+                </button>
+                <button class="tooltips clickReveal" id="clickTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
             </div>
             <div id = "clickToolTip" class ="row" style="display:none">
                 <p>
@@ -164,9 +168,11 @@
                 </p>
             </div>
             <div class="row">
-                <button class="price" id="cigPrice" style= "display:none"></button>
-                <button class="actionButton" id="cigBuy" style="display:none">--- Smoke a Cigarette ---<span class="countInfo" id="cigOwned"></span></button>
-                <button class="tooltips" id="cigTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+                <button class="price cigReveal" id="cigPrice" style= "display:none"></button>
+                <button class="actionButton cigReveal" id="cigBuy" style="display:none">--- Smoke a Cigarette ---<span class="countInfo" id="cigOwned"></span>
+                    <img class="imageButton cigReveal" style="display:none" src="assets/chainSmoke.png" alt="Broken Image" >
+                </button>
+                <button class="tooltips cigReveal" id="cigTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
             </div>
             <div id = "cigToolTip" class ="row" style="display:none">
                 <p>

@@ -13,6 +13,7 @@ const doNotCount = document.getElementById("doNotCount");
 let do_Not_Count = 0;
 
 /*      Upgrade Initializations     */
+const clickReveal = document.querySelectorAll(".clickReveal");
 const clickPrice = document.getElementById("clickPrice");
 const clickBuy = document.getElementById("clickBuy");
 const clickOwned = document.getElementById("clickOwned");
@@ -25,6 +26,7 @@ clickOwned.innerText = "Times Performed = " + clickUpOwned;
 clickPrice.innerText = clickUpPrice;
 
 
+const lessReveal = document.querySelectorAll(".lessReveal");
 const lessPrice = document.getElementById("lessPrice");
 const lessBuy = document.getElementById("lessBuy");
 const lessOwned = document.getElementById("lessOwned");
@@ -50,6 +52,7 @@ sIncPrice.innerText = sIncCurrPrice;
 sIncOwned.innerText = "Owned = 0";
 
 
+const cigReveal = document.querySelectorAll(".cigReveal");
 const cigPrice = document.getElementById("cigPrice");
 const cigBuy = document.getElementById("cigBuy");
 const cigOwned = document.getElementById("cigOwned");
@@ -239,6 +242,10 @@ function smoke() {
 }
 
 
+let lessUnlocked = false;
+let sIncUnlocked = false;
+let clickUnlocked = false;
+let cigUnlocked = false;
 
 function updateVariables() {
     clickMult.innerText = (click_mult * 100).toFixed(0) + " percent";
@@ -262,28 +269,36 @@ function updateVariables() {
 
 
     //Reveal new mechanics once a certain threshold has been met.
-    if (worldyAttachment <= -5) {
-        lessPrice.style.display = "inline-block";
-        lessBuy.style.display = "inline-block";
-        lessTip.style.display = "inline-block";
+    if (!lessUnlocked && worldyAttachment <= -5) {
+        lessReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        lessToolTip.style.display = "block";
+        lessUnlocked = true;
     }
 
-    if (worldyAttachment <= -25) {
+    if (!sIncUnlocked && worldyAttachment <= -25) {
         sIncReveal.forEach(ele => {
             ele.style.display = "inline-block";
         });
+        sIncToolTip.style.display = "block";
+        sIncUnlocked = true;
     }
 
     if (worldyAttachment <= -125) {
-        clickPrice.style.display = "inline-block";
-        clickBuy.style.display = "inline-block";
-        clickTip.style.display = "inline-block";
+        clickReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        clickToolTip.style.display = "block";
+        clickUnlocked = true;
     }
 
     if (worldyAttachment <= -500) {
-        cigPrice.style.display = "inline-block";
-        cigBuy.style.display = "inline-block";
-        cigTip.style.display = "inline-block";
+        cigReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        cigToolTip.style.display = "block";
+        cigUnlocked = true;
     }
 
     // Change the color of associated price buttons to indicate purchase availabilty.
