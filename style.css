@@ -6,6 +6,7 @@ body {
 }
 
 #scoreboard {
+    z-index: 9999;
     position: sticky;                              
     top: 0;
     width: 100%;    
@@ -15,10 +16,26 @@ body {
     background-color: #111; 
 }
 
+#topLeft {
+    position: absolute;
+    top: 8px;
+    left: 0px;
+    height: 128px;
+    width: 128px;
+}
+
+#topRight {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    height: 128px;
+    width: 128px;
+}
+
 #tickerBox {
     position: fixed;
     text-align: center;
-    transform: translateY(410px);
+    transform: translateY(430px);
 }
 
 #tickerTrack {
@@ -34,6 +51,7 @@ body {
 }
 
 .progress {
+    z-index: 0;
     position: relative;
     width: 90%;
     height: 50px;
@@ -50,6 +68,9 @@ body {
 
 .progress__text {
     color: black;
+    position: absolute;
+    top: 10px;
+    right: 47%;
     
     
     
@@ -74,7 +95,7 @@ body {
     border-radius: 50%;
     align-self: center;
     position: fixed;
-    transform: translateY(10px);
+    transform: translateY(30px);
 }
 
 #doNothing img {
