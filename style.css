@@ -18,9 +18,7 @@ body {
 #tickerBox {
     position: fixed;
     text-align: center;
-    transform: translateY(500px);
-
-
+    transform: translateY(410px);
 }
 
 #tickerTrack {
@@ -34,6 +32,33 @@ body {
     width: 100%;
     justify-content: space-evenly;
 }
+
+.progress {
+    position: relative;
+    width: 90%;
+    height: 50px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.progress__fill {
+    width: 50%;
+    height: 100%;
+    background: green;
+}
+
+.progress__text {
+    color: black;
+    
+    
+    
+
+}
+
+
+
+
 
 .mainColumn {
     display: flex;
@@ -49,7 +74,7 @@ body {
     border-radius: 50%;
     align-self: center;
     position: fixed;
-    transform: translateY(100px);
+    transform: translateY(10px);
 }
 
 #doNothing img {
