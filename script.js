@@ -109,10 +109,12 @@ let currentTick = -1;
 const introStinger = document.getElementById("introStinger");
 
 
-doNothing.addEventListener("click", () => {
+doNothing.addEventListener("click", (e) => {
     if (beginGame == true) {
-        worldyAttachment += base_per_click + (base_per_click * click_mult);
+        const soulLost = base_per_click + (base_per_click * click_mult);
+        worldyAttachment += soulLost;
         updateVariables();
+        show_Soul_Lost(e, soulLost);
     }
     else {
         worldyAttachment = 0;
@@ -378,3 +380,26 @@ volumeSlider.addEventListener("input" , () => {
     bgm.volume = volumeSlider.value;
 });
 
+function show_Soul_Lost(e, amount) {
+    const ele = document.createElement('span');
+    ele.textContent = `-${Math.abs(amount).toFixed(2)}`;
+
+    Object.assign(ele.style, {
+    position: 'fixed',
+    left: e.clientX + 'px',
+    top:  e.clientY + 'px',
+    
+    pointerEvents: 'none',
+    zIndex: '9500',
+    fontWeight: '700',
+    color: '#eaeaea',
+    transform: 'translateY(-15px)',
+    background: 'rgba(0,0,0,0.45)',
+    padding: '2px 6px',
+    borderRadius: '6px',
+    fontSize: '16px',
+  });
+
+    document.body.appendChild(ele);
+    setTimeout(() => ele.remove(), 500);
+}
