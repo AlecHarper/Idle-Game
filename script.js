@@ -383,17 +383,16 @@ volumeSlider.addEventListener("input" , () => {
 function show_Soul_Lost(e, amount) {
     const ele = document.createElement('span');
     ele.textContent = `-${Math.abs(amount).toFixed(2)}`;
+    ele.className = "driftUp";
 
     Object.assign(ele.style, {
     position: 'fixed',
     left: e.clientX + 'px',
     top:  e.clientY + 'px',
-    
     pointerEvents: 'none',
     zIndex: '9500',
     fontWeight: '700',
     color: '#eaeaea',
-    transform: 'translateY(-15px)',
     background: 'rgba(0,0,0,0.45)',
     padding: '2px 6px',
     borderRadius: '6px',
@@ -401,5 +400,5 @@ function show_Soul_Lost(e, amount) {
   });
 
     document.body.appendChild(ele);
-    setTimeout(() => ele.remove(), 500);
+    setTimeout(() => ele.remove(), 1000);
 }

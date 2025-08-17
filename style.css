@@ -176,3 +176,13 @@ body {
     width: 200px;
     height: 200px;
 }
+
+.driftUp {
+  animation: driftUp 1.0s linear forwards; 
+  will-change: transform;
+}
+
+@keyframes driftUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-30px); }  
+}
