@@ -38,6 +38,18 @@ let lessCurrPrice = Math.ceil(20 * Math.pow(1.09, less_Owned));
 lessOwned.innerText = "Times Performed = " + less_Owned;
 lessPrice.innerText = lessCurrPrice;
 
+const photoReveal = document.querySelectorAll(".photoReveal");
+const photoPrice = document.getElementById("photoPrice");
+const photoBuy = document.getElementById("photoBuy");
+const photoOwned = document.getElementById("photoOwned");
+const photoTip = document.getElementById("photoTip");
+const photoToolTip = document.getElementById("photoToolTip");
+
+let photo_Owned = 0;
+let photoCurrPrice = Math.ceil(20 * Math.pow(1.09, photo_Owned));
+photoOwned.innerText = "Photos burned = " + photo_Owned;
+photoPrice.innerText = photoCurrPrice;
+
 const sIncReveal = document.querySelectorAll(".sIncReveal");
 const sIncPrice = document.getElementById("sIncPrice");
 const sIncBuy = document.getElementById("sIncBuy");
@@ -60,9 +72,9 @@ const cigTip = document.getElementById("cigTip");
 const cigToolTip = document.getElementById("cigToolTip");
 
 let cig_Smoked = 0;
-let cig_Price = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
+let cigCurrPrice = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
 cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
-cigPrice.innerText = cig_Price;
+cigPrice.innerText = cigCurrPrice;
 
 
 const bingeReveal = document.querySelectorAll(".bingeReveal");
@@ -94,9 +106,9 @@ const totalBurned = document.getElementById("totalBurned");
     
 /*      Feature Unlocks     */
 let lessUnlocked = false;
+let photoUnlocked = false;
 let sIncUnlocked = false;
 let clickUnlocked = false;
-
 let cigUnlocked = false;
 let bingeUnlocked = false;
 
@@ -195,6 +207,25 @@ lessTip.addEventListener("click", () => {
     }
 });
 
+photoBuy.addEventListener("click", () => {
+    if (Math.abs(worldyAttachment) >= photoCurrPrice) {
+        worldyAttachment += photoCurrPrice;
+        photo_Owned += 1;
+        total_Burned++;
+        photoCurrPrice = Math.ceil(50 * Math.pow(1.35, photo_Owned));
+        updateVariables();
+    }
+});
+
+photoTip.addEventListener("click", () => {
+    if (photoToolTip.style.display == "none") {
+        photoToolTip.style.display = "block";
+    }
+    else {
+        photoToolTip.style.display = "none";
+    }
+});
+
 sIncBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= sIncCurrPrice) {
         worldyAttachment += sIncCurrPrice;
@@ -232,10 +263,10 @@ clickTip.addEventListener("click", () => {
 });
 
 cigBuy.addEventListener("click", () => {
-    if (Math.abs(worldyAttachment) >= cig_Price) {
-        worldyAttachment += cig_Price;
+    if (Math.abs(worldyAttachment) >= cigCurrPrice) {
+        worldyAttachment += cigCurrPrice;
         cig_Smoked += 1;
-        cig_Price = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
+        cigCurrPrice = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
         updateVariables();
     }
 });
@@ -295,7 +326,7 @@ function updateClock() {
         if (!musicStarted) {
             volumeSlider.value = "0.00";
             bgm.volume = 0.00;
-            playTrack(playlist.length - 1);
+            playTrack(Math.floor(Math.random() * playlist.length));
             musicStarted = true;
         }
     
@@ -354,8 +385,12 @@ function updateVariables() {
     sIncOwned.innerText = "Owned = " + sIncCount;
     clickPrice.innerText = clickUpPrice;
     clickOwned.innerText = "Times Performed = " + clickUpOwned;
-    cigPrice.innerText = cig_Price;
+    cigPrice.innerText = cigCurrPrice;
     cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
+    photoPrice.innerText = photoCurrPrice;
+    photoOwned.innerText = "Photos burned = " + photo_Owned;
+    totalBurned.innerText = "Memorabilia Discarded: " + total_Burned;
+
     
 
 
@@ -368,6 +403,14 @@ function updateVariables() {
         lessUnlocked = true;
     }
 
+    if (!photoUnlocked && worldyAttachment <= -25) {
+        photoReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        photoToolTip.style.display = "block";
+        photoUnlocked = true;
+    }
+    
     if (!sIncUnlocked && worldyAttachment <= -25) {
         sIncReveal.forEach(ele => {
             ele.style.display = "inline-block";
@@ -409,6 +452,14 @@ function updateVariables() {
         lessPrice.style.backgroundColor = "red";
     }
 
+       if (Math.abs(worldyAttachment) >= photoCurrPrice) {
+        photoPrice.style.backgroundColor = "green";
+    }
+    else {
+        photoPrice.style.backgroundColor = "red";
+    }
+    
+    
     if (Math.abs(worldyAttachment) >= sIncCurrPrice) {
         sIncPrice.style.backgroundColor = "green";
     }
@@ -423,7 +474,7 @@ function updateVariables() {
         clickPrice.style.backgroundColor = "red";
     }
 
-    if (Math.abs(worldyAttachment) >= cig_Price) {
+    if (Math.abs(worldyAttachment) >= cigCurrPrice) {
         cigPrice.style.backgroundColor = "green";
     }
     else {

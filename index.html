@@ -131,6 +131,21 @@
             <div class="row">
                 <p class = "storeHeader">--- Memorabilia Disposal ---</p>
             </div>
+            
+            <!--  Burn A Photo  -->
+            <div class="row">
+                <button class="price photoReveal" style = "display:none" id="photoPrice"></button>
+                <button class="actionButton photoReveal" style = "display:none" id="photoBuy">--- Burn A Photo ---<span class="countInfo" id="photoOwned"></span>
+                    <img class="imageButton photoReveal" style="display:none" src="" alt="Image Coming Soon" >
+                </button>
+                <button class="tooltips photoReveal" id="photoTip" style="display:none"><img src = "assets/dropDownArrow.png" alt="Broken image"></button>
+            </div>
+            <div id = "photoToolTip" class="row" style="display: none">
+                <p>
+                    You've found another photo... you know what to do. (+1 to Memorabilia Discarded - Discarding enough memorabilia will enable certain upgrades. Discovering a way to automate this process would help lower your worldy attachment...)
+                </p>
+            </div>
+            
             <!-- Small Incinerators -->
             <div class="row">
                 <button class="price sIncReveal" style = "display:none" id="sIncPrice"></button>
