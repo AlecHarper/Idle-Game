@@ -90,7 +90,7 @@ burnPerDay.innerText = burnPer;
 
 let total_Burned = 0;
 const totalBurned = document.getElementById("totalBurned");
-totalBurned.innerText = total_Burned;
+
     
 /*      Feature Unlocks     */
 let lessUnlocked = false;
@@ -133,7 +133,8 @@ let musicStarted = false;
 const bgm = document.getElementById("bgm");
 const bgmsource = document.getElementById("bgm-source");
 const volumeSlider = document.getElementById("volumeSlider");
-bgm.volume = volumeSlider.value;
+bgm.volume = 0;
+let fadeInProgress = true;
 
 /*      Flavor Text Set-Up       */
 const flavorTextList = [
@@ -279,8 +280,21 @@ function updateClock() {
     const days = Math.floor(secondsElapsed / 10);
     clock.innerText =
         `Days since: ${days}`;
+        
+        if (fadeInProgress && musicStarted) {
+            const cur = parseFloat(volumeSlider.value) || 0;
+            const next = Math.min(0.3, +(cur + 0.01).toFixed(2)); // coerce & clamp
+            volumeSlider.value = String(next);
+            bgm.volume = next;
 
-        if (days > 0 && !musicStarted) {
+            if (next >= 0.3) {
+                fadeInProgress = false;
+            }
+        }
+
+        if (!musicStarted) {
+            volumeSlider.value = "0.00";
+            bgm.volume = 0.00;
             playTrack(playlist.length - 1);
             musicStarted = true;
         }
@@ -425,7 +439,7 @@ function updateVariables() {
 function newDay() {
     worldyAttachment += -(burnPer);
     total_Burned += burnPer;
-    totalBurned.innerText = total_Burned;
+    totalBurned.innerText = "Memorabilia Discarded: " + total_Burned;
     updateVariables();
 }
 
@@ -453,11 +467,6 @@ function playTrack(index) {
     currentTrack = index;
     song = playlist[index];
     songName.innerText = song;
-    prefix.style.display = "block";
-    songName.style.display = "block";
-    lastSong.style.display = "inline-block";
-    nextSong.style.display = "inline-block";
-    volumeSlider.style.display = "inline-block"
     bgmsource.src = playlist[currentTrack];
     bgm.load();
     bgm.play();
@@ -491,6 +500,7 @@ nextSong.addEventListener("click", () => {
 });
 
 volumeSlider.addEventListener("input" , () => {
+    fadeInProgress = false;
     bgm.volume = volumeSlider.value;
 });
 

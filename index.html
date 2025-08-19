@@ -81,22 +81,6 @@
                 <p>Possessions Burned Each Day:</p>
                 <p id="burnPer"></p>
             </div>
-            <div class="row">
-                <p>Total Possessions Burned:</p>
-                <p id="totalBurned"></p>
-            </div>
-
-            <!-- Music Player  -->
-            <div class = "row">
-                <span class="storeHeader" id="prefix" style="display:none">--- Current Track ---<span class = "storeHeader" style="display:none" id="currentTrack"></span></span>
-            </div>
-            <div class = "row">
-                <button class="actionButton" id="music1" style="display: none">Previous Song</button>
-                <button class="actionButton" id="music2" style="display: none">Next Song</button>
-            </div>
-            <div class = "row">
-                <input type="range" id="volumeSlider" style = "display: none" min="0" max="1" step="0.01" value="0.5">
-            </div>
         </div>
         
         <!-- DO NOTHING COLUMN-->
@@ -188,9 +172,27 @@
     </div> 
     
     <hr>
-    <div id="clockBox">
-        <span id="clockText"></span>
-    </div>
+        <div id="bottomContainer">
+            <div class = "mainColumn">
+                <span class="footerText" id="clockText"></span>
+            </div>
+            <div class = "mainColumn">
+                <span class="footerText" id="totalBurned"></span>
+            </div>
+            <!--        Music Player        -->
+            <div class = "mainColumn">
+                <div class = "row">
+                    <button class="musicButton" id="music1">Previous Song</button>
+                    <span class="musicText" id="prefix">--- Current Track ---<p class = "musicText" id="currentTrack"></p></span>
+                    <button class="musicButton" id="music2">Next Song</button>
+                </div>
+                <div class="row">
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0">
+                </div>
+
+
+            </div>
+        </div>
     
     <audio id="bgm">
         <source id="bgm-source" src="" type="audio/mpeg">
