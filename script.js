@@ -50,6 +50,19 @@ let photoCurrPrice = Math.ceil(20 * Math.pow(1.09, photo_Owned));
 photoOwned.innerText = "Photos burned = " + photo_Owned;
 photoPrice.innerText = photoCurrPrice;
 
+const wellReveal = document.querySelectorAll(".wellReveal");
+const wellPrice = document.getElementById("wellPrice");
+const wellBuy = document.getElementById("wellBuy");
+const wellOwned = document.getElementById("wellOwned");
+const wellTip = document.getElementById("wellTip");
+const wellToolTip = document.getElementById("wellToolTip");
+
+let well_Owned = 0;
+let wellCurrPrice = Math.ceil(20 * Math.pow(1.09, well_Owned));
+wellOwned.innerText = "Trips made to the well = " + well_Owned;
+wellPrice.innerText = wellCurrPrice;
+
+
 const sIncReveal = document.querySelectorAll(".sIncReveal");
 const sIncPrice = document.getElementById("sIncPrice");
 const sIncBuy = document.getElementById("sIncBuy");
@@ -108,6 +121,7 @@ const totalDiscarded = document.getElementById("totalBurned");
 /*      Feature Unlocks     */
 let lessUnlocked = false;
 let photoUnlocked = false;
+let wellUnlocked = false;       
 let sIncUnlocked = false;
 let clickUnlocked = false;
 let cigUnlocked = false;
@@ -224,6 +238,25 @@ photoTip.addEventListener("click", () => {
     }
     else {
         photoToolTip.style.display = "none";
+    }
+});
+
+wellBuy.addEventListener("click", () => {
+    if (Math.abs(worldyAttachment) >= wellCurrPrice) {
+        worldyAttachment += wellCurrPrice;
+        well_Owned += 1;
+        total_Discarded += 5;
+        wellCurrPrice = Math.ceil(50 * Math.pow(1.35, well_Owned));
+        updateVariables();
+    }
+});
+
+wellTip.addEventListener("click", () => {
+    if (wellToolTip.style.display == "none") {
+        wellToolTip.style.display = "block";
+    }
+    else {
+        wellToolTip.style.display = "none";
     }
 });
 
@@ -402,8 +435,9 @@ function updateVariables() {
     photoPrice.innerText = photoCurrPrice;
     photoOwned.innerText = "Photos burned = " + photo_Owned;
     totalDiscarded.innerText = "Memorabilia Discarded: " + total_Discarded;
+    wellPrice.innerText = wellCurrPrice;
+    wellOwned.innerText = "Trips made to the well = " + well_Owned;
 
-    
 
 
     //Reveal new mechanics once a certain threshold has been met.
@@ -423,7 +457,15 @@ function updateVariables() {
         photoUnlocked = true;
     }
     
-    if (!sIncUnlocked && worldyAttachment <= -25) {
+    if (!wellUnlocked && worldyAttachment <= -50) {
+        wellReveal.forEach(ele => {
+            ele.style.display = "inline-block";
+        });
+        wellToolTip.style.display = "block";
+        wellUnlocked = true;
+    }
+    
+    if (!sIncUnlocked && worldyAttachment <= -100) {
         sIncReveal.forEach(ele => {
             ele.style.display = "inline-block";
         });
@@ -471,7 +513,13 @@ function updateVariables() {
         photoPrice.style.backgroundColor = "red";
     }
     
-    
+    if (Math.abs(worldyAttachment) >= wellCurrPrice) {
+        wellPrice.style.backgroundColor = "green";
+    }
+    else {
+        wellPrice.style.backgroundColor = "red";
+    }
+
     if (Math.abs(worldyAttachment) >= sIncCurrPrice) {
         sIncPrice.style.backgroundColor = "green";
     }
