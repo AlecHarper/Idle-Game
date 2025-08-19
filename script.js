@@ -72,6 +72,7 @@ const cigTip = document.getElementById("cigTip");
 const cigToolTip = document.getElementById("cigToolTip");
 
 let cig_Smoked = 0;
+let cig_Level = 1;
 let cigCurrPrice = Math.ceil(1000 * Math.pow(1.5, cig_Smoked));
 cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
 cigPrice.innerText = cigCurrPrice;
@@ -100,8 +101,8 @@ let burnPer = (sIncCount * 10) + (lIncCount * 50);
 burnPerDay = document.getElementById("burnPer");
 burnPerDay.innerText = burnPer;
 
-let total_Burned = 0;
-const totalBurned = document.getElementById("totalBurned");
+let total_Discarded = 0;
+const totalDiscarded = document.getElementById("totalBurned");
 
     
 /*      Feature Unlocks     */
@@ -211,7 +212,7 @@ photoBuy.addEventListener("click", () => {
     if (Math.abs(worldyAttachment) >= photoCurrPrice) {
         worldyAttachment += photoCurrPrice;
         photo_Owned += 1;
-        total_Burned++;
+        total_Discarded++;
         photoCurrPrice = Math.ceil(50 * Math.pow(1.35, photo_Owned));
         updateVariables();
     }
@@ -286,7 +287,7 @@ bingeAction.addEventListener("click", () => {
     }
     else if (bingeAvailable) {
         bingeActive = true;
-        bingeTimer = 15;
+        bingeCooldown.innerText = "Active for " + bingeTimer + " seconds.";
         click_mult += 10;
         updateVariables();
     }
@@ -312,57 +313,68 @@ function updateClock() {
     clock.innerText =
         `Days since: ${days}`;
         
-        if (fadeInProgress && musicStarted) {
-            const cur = parseFloat(volumeSlider.value) || 0;
-            const next = Math.min(0.3, +(cur + 0.01).toFixed(2)); // coerce & clamp
-            volumeSlider.value = String(next);
-            bgm.volume = next;
-
-            if (next >= 0.3) {
-                fadeInProgress = false;
-            }
-        }
-
-        if (!musicStarted) {
-            volumeSlider.value = "0.00";
-            bgm.volume = 0.00;
-            playTrack(Math.floor(Math.random() * playlist.length));
-            musicStarted = true;
-        }
-    
         if (days != lastDay) {
-        lastDay = days;
-        if (days % 5 === 0) {
-            updateFlavorText();
+            lastDay = days;
+            if (days % 5 === 0) {
+                updateFlavorText();
+            }
+            newDay();
         }
-        newDay();
-    }
     smoke();
 
-    if (bingeUnlocked) {
+    // Fade music and start it - only relevant for the beginning of game ... needs refactored 
+    if (fadeInProgress && musicStarted) {
+        const cur = parseFloat(volumeSlider.value) || 0;
+        const next = Math.min(0.3, +(cur + 0.01).toFixed(2)); // coerce & clamp
+        volumeSlider.value = String(next);
+        bgm.volume = next;
+
+        if (next >= 0.3) {
+            fadeInProgress = false;
+        }
+    }
+
+    if (!musicStarted) {
+        volumeSlider.value = "0.00";
+        bgm.volume = 0.00;
+        playTrack(Math.floor(Math.random() * playlist.length));
+        musicStarted = true;
+    }
+
+    // Binge Smoking Cooldown
+    
+     if (bingeUnlocked) {
         if (binge_Cooldown <= 0) {
+            bingeCooldown.innerText = "Binge smoke is available!"
             bingeAvailable = true;
         }
         else {
             binge_Cooldown--;
+            bingeCooldown.innerText = "Available in " + binge_Cooldown + " seconds.";
         }
+    }
+    
+    if (bingeTimer <= 0)  {
+        bingeTimer = 15;
     }
 
     if (bingeActive) {
         bingeTimer--;
+        bingeCooldown.innerText = "Active for " + bingeTimer + " seconds.";
         if (bingeTimer <= 0) {
             bingeActive = false;
             bingeAvailable = false;
             click_mult -= 10;
             binge_Cooldown = 120;
+            bingeCooldown.innerText = "Available in " + binge_Cooldown + " seconds.";
         }
     }
-    bingeCooldown.innerText = binge_Cooldown;
+    
 
 }
 
 function smoke() {
-    worldyAttachment += gainPer * cig_Smoked;
+    worldyAttachment += (base_per_click * cig_Level) * cig_Smoked;
     updateVariables();
 }
 
@@ -389,7 +401,7 @@ function updateVariables() {
     cigOwned.innerText = "Cigs Smoked = " + cig_Smoked;
     photoPrice.innerText = photoCurrPrice;
     photoOwned.innerText = "Photos burned = " + photo_Owned;
-    totalBurned.innerText = "Memorabilia Discarded: " + total_Burned;
+    totalDiscarded.innerText = "Memorabilia Discarded: " + total_Discarded;
 
     
 
@@ -489,8 +501,8 @@ function updateVariables() {
 //Function is called on every new day. A new day is called every 10 seconds.
 function newDay() {
     worldyAttachment += -(burnPer);
-    total_Burned += burnPer;
-    totalBurned.innerText = "Memorabilia Discarded: " + total_Burned;
+    total_Discarded += burnPer;
+    totalDiscarded.innerText = "Memorabilia Discarded: " + total_Discarded;
     updateVariables();
 }
 
@@ -507,6 +519,8 @@ function updateFlavorText() {
     }, 1000);
 }
 
+
+// Music Stuff
 const songName = document.getElementById("currentTrack");
 const prefix = document.getElementById("prefix");
 const lastSong = document.getElementById("music1");
@@ -554,6 +568,9 @@ volumeSlider.addEventListener("input" , () => {
     fadeInProgress = false;
     bgm.volume = volumeSlider.value;
 });
+
+
+//Animation when clicking Do Not button
 
 function show_Soul_Lost(e, amount) {
     const ele = document.createElement('span');
