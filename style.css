@@ -228,3 +228,12 @@ body {
 #volumeSlider {
     transform: scale(1.2);
 }
+
+.statBox{
+    border: 5px solid black;
+    border-radius: 20px;
+}
+
+#bingeAction {
+    border-radius: 100px;
+}
